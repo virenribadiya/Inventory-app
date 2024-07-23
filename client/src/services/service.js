@@ -13,7 +13,7 @@ export const services = {
             throw error;
         }
     },
-    async getLoginUserDetails(paramObj){
+    async getLoginUserDetailsExample(paramObj){
         try {
             const response = await commonApiService.getResponse({
                 apiName: '/user/getLoginUserDetails',

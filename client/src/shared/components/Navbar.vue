@@ -22,14 +22,18 @@ const menuItems = ref([
     { title: 'Logout', icon: 'mdi-logout', pathName: 'Profile' }
 ]);
 
+// method to fetch user details
 const getLoginUserDetails = async () => {
     try {
+        // start the loader if there
         userData.value = await services.getLoginUserDetails({});
         if (userData.value) {
             isLogin.value = true;
         }
     } catch (error) {
         console.log(error);
+    } finally {
+        // stop the loader --> this will execute everytime.
     }
 }
 
@@ -120,7 +124,7 @@ onMounted(() => {
     </v-app-bar>
 
     <v-navigation-drawer v-if="layoutRole === 'Admin'" v-model="drawer" :rail="rail" permanent @click="rail = false">
-        <v-list density="default" active-class="active-item" >
+        <v-list density="default" active-class="active-item">
             <v-tooltip text="Dashboard" v-if="rail" activator="#Dashboard" />
             <v-list-item id="Dashboard" :to="{ name: 'Dashboard' }">
                 <template v-slot:prepend>
@@ -130,7 +134,7 @@ onMounted(() => {
             </v-list-item>
 
             <v-tooltip text="Orders" v-if="rail" activator="#Orders" />
-            <v-list-item id="Orders" :to="{ name: 'OrderList' }"  >
+            <v-list-item id="Orders" :to="{ name: 'OrderList' }">
                 <template v-slot:prepend>
                     <v-icon>mdi-truck-fast</v-icon>
                 </template>
@@ -159,7 +163,9 @@ onMounted(() => {
 
 <style scoped>
 .active-item {
-    background-color: green; /* Red */
-    color: white; /* Text color */
+    background-color: green;
+    /* Red */
+    color: white;
+    /* Text color */
 }
 </style>
